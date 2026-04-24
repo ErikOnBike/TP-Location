@@ -6,9 +6,9 @@ Class {
 		'#lon => CynPropertySlot',
 		'#timestamp => CynPropertySlot'
 	],
-	#category : 'ToolParadise-Location-Data-Model',
-	#package : 'ToolParadise-Location-Data',
-	#tag : 'Model'
+	#category : 'ToolParadise-Location-Model-Core',
+	#package : 'ToolParadise-Location-Model',
+	#tag : 'Core'
 }
 
 { #category : 'accessing' }
