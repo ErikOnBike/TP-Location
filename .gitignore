@@ -1,0 +1,12 @@
+*.swp
+.DS_Store
+
+server/server.image
+server/data/database.db
+server/data/log.db
+server/node_modules
+server/server-config.json
+server/server.image
+
+update-vm.sh
+update-image.sh
