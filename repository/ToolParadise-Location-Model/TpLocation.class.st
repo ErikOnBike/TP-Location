@@ -11,6 +11,22 @@ Class {
 	#tag : 'Core'
 }
 
+{ #category : 'accessing - generated' }
+TpLocation class >> allPropertyNames [
+
+	"Generated code. DO NOT EDIT"
+
+	^ #(id lat lon timestamp)
+]
+
+{ #category : 'accessing - generated' }
+TpLocation class >> readWriteProperties [
+
+	"Generated code. DO NOT EDIT"
+
+	^ #(id lat lon timestamp)
+]
+
 { #category : 'accessing' }
 TpLocation >> addTimestamp [
 
