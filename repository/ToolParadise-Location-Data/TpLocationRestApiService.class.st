@@ -16,9 +16,10 @@ TpLocationRestApiService >> addLocation: aLocation accountId: aString [
 
 	modelDatabase
 		performOne: #createLocation
-		statement: 'INSERT INTO locations (id, timestamp, lat, lon) VALUES (:id, :timestamp, :lat, :lon)'
+		statement: 'INSERT INTO locations (id, timestamp, accountId, lat, lon) VALUES (:id, :accountId, :timestamp, :lat, :lon)'
 		bind: {
 			#id -> aLocation id.
+			#accountId -> aString.
 			#timestamp -> aLocation timestamp.
 			#lat -> aLocation lat.
 			#lon -> aLocation lon } asDictionary
