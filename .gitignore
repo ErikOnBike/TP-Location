@@ -2,6 +2,7 @@
 .DS_Store
 
 server/server.image
+server/send_loc.sh
 server/data/database.db
 server/data/log.db
 server/node_modules
