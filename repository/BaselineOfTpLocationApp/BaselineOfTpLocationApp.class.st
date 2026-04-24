@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfTpLocationApp,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfTpLocationApp
+	#name : 'BaselineOfTpLocationApp',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfTpLocationApp',
+	#package : 'BaselineOfTpLocationApp'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfTpLocationApp >> baseline: spec [
 
 	<baseline>
@@ -17,8 +18,8 @@ BaselineOfTpLocationApp >> baseline: spec [
 
 		"Packages"
 		spec
-			package: 'ToolParadise-Location-App' with: [ spec requires: #('ToolParadise-Location-Model') ] ;
-			"package: 'ToolParadise-Location-Data' with: [ spec requires: #('ToolParadise-Location-Model') ] ;"
+			package: 'ToolParadise-Location-App' with: [ spec requires: #('ToolParadise-Location-Data') ] ;
+			package: 'ToolParadise-Location-Data' with: [ spec requires: #('ToolParadise-Location-Model') ] ;
 			package: 'ToolParadise-Location-Model' with: [ spec requires: #('CodeParadise') ].
 
 		"Groups"
