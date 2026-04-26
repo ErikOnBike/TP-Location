@@ -14,7 +14,7 @@ TpLocationWebApplication class >> allowedPackages [
 	Include:
 		Package containing the Location Model (through TpLocation)"
 
-	^ super allowedPackages, { TplLocation package }
+	^ super allowedPackages, { TplLocation package . CpLeaflet package }
 ]
 
 { #category : 'accessing' }

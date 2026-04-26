@@ -113,7 +113,7 @@ TpLocationRestApiService >> addLocation: aLocation accountId: aString [
 
 	modelDatabase
 		performOne: #createLocation
-		statement: 'INSERT INTO locations (id, timestamp, accountId, lat, lon) VALUES (:id, :accountId, :timestamp, :lat, :lon)'
+		statement: 'INSERT INTO locations (id, accountId, timestamp, lat, lon) VALUES (:id, :accountId, :timestamp, :lat, :lon)'
 		bind: {
 			#id -> aLocation id.
 			#accountId -> aString.
@@ -245,13 +245,35 @@ TpLocationRestApiService >> createPreferencesForAccountId: aString [
 	^ preferences
 ]
 
+{ #category : 'API - locations' }
+TpLocationRestApiService >> getConnectionLocations: connectionIdString forAccount: accountIdString [
+
+	"Answer the 4 most recent locations of the specified connection"
+
+	| locationAccountId |
+
+	locationAccountId := modelDatabase
+		selectValue: #getLocationAccountId
+		statement: 'SELECT otherId FROM connections WHERE id=:id AND accountId=:accountId'
+		bind: {
+			#id -> connectionIdString.
+			#accountId -> accountIdString } asDictionary.
+
+	locationAccountId ifNil: [ CpNodeJSRestBadRequestError signal ].
+
+	^ modelDatabase
+		selectMany: #accountLocations
+		statement: 'SELECT lat, lon, timestamp FROM locations WHERE accountId=:accountId ORDER BY timestamp DESC LIMIT 400'
+		bind: { #accountId -> locationAccountId } asDictionary
+]
+
 { #category : 'API' }
 TpLocationRestApiService >> getConnectionLocations: aRestRequest response: aRestResponse [
 
 	<get: '/api/connections/:id/locations'>
 	<authorization: #validateConnection:>
 
-	^ self send: (self getLocationsOfAccount: (aRestRequest pathParameterAt: #id)) response: aRestResponse
+	self send: (self getConnectionLocations: (aRestRequest pathParameterAt: #id) forAccount: aRestRequest accountId) response: aRestResponse
 ]
 
 { #category : 'API' }
@@ -259,7 +281,7 @@ TpLocationRestApiService >> getConnections: aRestRequest response: aRestResponse
 
 	<get: '/api/connections'>
 
-	^ self send: (self getConnectionsOfAccount: aRestRequest accountId) response: aRestResponse
+	self send: (self getConnectionsOfAccount: aRestRequest accountId) response: aRestResponse
 ]
 
 { #category : 'API - connections' }
@@ -270,17 +292,6 @@ TpLocationRestApiService >> getConnectionsOfAccount: aString [
 	^ modelDatabase
 		selectMany: #getConnections
 		statement: 'SELECT id, otherId, name FROM connections WHERE accountId=:accountId ORDER BY name'
-		bind: (Dictionary with: #accountId -> aString)
-]
-
-{ #category : 'API - locations' }
-TpLocationRestApiService >> getLocationsOfAccount: aString [
-
-	"Answer the 4 most recent locations"
-
-	^ modelDatabase
-		selectMany: #accountLocations
-		statement: 'SELECT lat, lon, timestamp FROM locations WHERE accountId=:accountId ORDER BY timestamp DESC LIMIT 400'
 		bind: (Dictionary with: #accountId -> aString)
 ]
 
@@ -449,21 +460,21 @@ TpLocationRestApiService >> updatePreferences: aRestRequest response: aRestRespo
 { #category : 'API - authorization' }
 TpLocationRestApiService >> validateConnection: aRestRequest [
 
-	| accountId otherId connectionExists |
+	| accountId connectionId connectionExists |
 
 	self validateAuthorizedRequest: aRestRequest.
 
 	"Since the request is validated as authorized an account should be known"
 	accountId := aRestRequest accountId.
-	otherId := aRestRequest pathParameterAt: #id.
+	connectionId := aRestRequest pathParameterAt: #id.
 
 	"Validate connection exists"
 	connectionExists := modelDatabase
 		exists: #connectionExists
-		statement: 'SELECT id FROM connections WHERE follower=:follower AND other=:other'
+		statement: 'SELECT id FROM connections WHERE accountId=:accountId AND id=:connectionId'
 		bind: {
-			#follower -> accountId.
-			#other -> otherId } asDictionary.
+			#accountId -> accountId.
+			#connectionId -> connectionId } asDictionary.
 
 	connectionExists ifFalse: [ CpNodeJSRestForbiddenError signal ]
 ]

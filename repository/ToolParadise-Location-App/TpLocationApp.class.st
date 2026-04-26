@@ -25,7 +25,9 @@ TpLocationApp class >> beLoaded [
 	CpStyleAttributeDataUpdater beLoaded.
 	CpPropertyAttributeDataUpdater beLoaded.
 	CpEventAttributeDataUpdater beLoaded.
-	CpAnnouncementAttributeDataUpdater beLoaded
+	CpAnnouncementAttributeDataUpdater beLoaded.
+
+	CpLeaflet
 ]
 
 { #category : 'class initialization' }
@@ -176,6 +178,8 @@ TpLocationApp >> initialize [
 
 	account propertyAt: #expires put: #never.
 
+	preferences := TplPreferences new.
+
 	CynPropertyEntity restApiClient hasAccessToken
 		ifFalse: [ ^ self ].
 
@@ -185,7 +189,9 @@ TpLocationApp >> initialize [
 { #category : 'actions' }
 TpLocationApp >> loadData [
 
-	self loadDataConnections
+	self
+		loadDataUserPreferences ;
+		loadDataConnections
 ]
 
 { #category : 'actions' }
@@ -196,8 +202,25 @@ TpLocationApp >> loadDataConnections [
 	self traceCr: 'Reading connections'.
 	[
 		connections ifNil: [ connections := OrderedCollection new ].
-		self dataMerge: (TplLocation restRead asOrderedCollection) into: connections
+		self dataMerge: (TplConnection restRead asOrderedCollection) into: connections
 	] on: Error do: [ :err | self warnCr: 'Unable to read connections: ', err printString ]
+]
+
+{ #category : 'actions' }
+TpLocationApp >> loadDataUserPreferences [
+
+	"Load data (make it failsafe when no data connection is available)"
+
+	| all |
+
+	self traceCr: 'Reading user preferences'.
+	[
+		all := TplPreferences restRead.
+		preferences merge: all first.
+
+		"Now we know the preferred language, update it"
+		self updateCurrentLanguage.
+	] on: Error do: [ :err | self warnCr: 'Unable to read user preferences: ', err printString ]
 ]
 
 { #category : 'actions' }
