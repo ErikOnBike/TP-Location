@@ -16,3 +16,9 @@ TpLocationWebApplication class >> allowedPackages [
 
 	^ super allowedPackages, { TplLocation package }
 ]
+
+{ #category : 'accessing' }
+TpLocationWebApplication class >> app [
+
+	^ #'tp-location'
+]

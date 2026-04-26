@@ -99,10 +99,10 @@ TplPage >> documentTitleFrom: aString [
 
 	^ aString
 		ifNotNil: [
-			aString = #AutiMelody
+			aString = #Location
 				ifTrue: [ aString ]
-				ifFalse: [ 'AutiMelody - ', aString ] ]
-		ifNil: [ #AutiMelody ]
+				ifFalse: [ 'Location - ', aString ] ]
+		ifNil: [ #Location ]
 ]
 
 { #category : 'testing' }

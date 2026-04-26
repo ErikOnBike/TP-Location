@@ -10,6 +10,100 @@ Class {
 	#tag : 'View'
 }
 
+{ #category : 'class initialization' }
+TpLocationApp class >> beLoaded [
+
+	CynText beLoaded.
+
+	IonLabel beLoaded.
+	IonText beLoaded.
+
+	IonRefresher beLoaded.
+	IonRefresherContent beLoaded.
+
+	CpClassedAttributeDataUpdater beLoaded.
+	CpStyleAttributeDataUpdater beLoaded.
+	CpPropertyAttributeDataUpdater beLoaded.
+	CpEventAttributeDataUpdater beLoaded.
+	CpAnnouncementAttributeDataUpdater beLoaded
+]
+
+{ #category : 'class initialization' }
+TpLocationApp class >> defaultFallbackLocales [
+
+	^ self defaultLocale = #en
+		ifTrue: [ #() ]
+		ifFalse: [ #(en) ]
+]
+
+{ #category : 'class initialization' }
+TpLocationApp class >> defaultLocale [
+
+	| language |
+
+	language := CpBrowserNavigator current language.
+
+	language ifNil: [ ^ super defaultLocale ].
+
+	"Extract language from locale"
+	language := (language findTokens: '-') first.
+
+	^ (TplPreferences languages includes: language)
+		ifTrue: [ language ]
+		ifFalse: [ super defaultLocale ]
+]
+
+{ #category : 'class initialization' }
+TpLocationApp class >> globalStyle [
+
+	<webResource: #css>
+
+	^ super globalStyle, '
+:root {
+	--ion-color-primary: #FF487C;
+	--ion-color-danger: #FA2A76;
+
+	--canyon-label-color: #333;
+
+	--location-color-primary: #FF487C;
+	--location-color-secondary: #F7B32B;
+	--location-color-medium: #45CFC5;
+	--location-color-dark: #00006D;
+
+	--location-background-color-primary: #FF487C4D;
+	--location-background-color-secondary: #F7B32B40;
+	--location-background-color-medium: #45CFC54C;
+	--location-background-color-dark: #00006D33;
+}
+ion-menu ion-title {
+	padding-inline-start: 10px;
+	padding-inline-end: 10px;
+	color: #00006D;
+}
+@media screen and (min-width: 940px) {
+	body {
+		transition: background-color 1s;
+		background-color: var(--ion-background-color);
+	}
+	body.thin {
+		background-color: #999;
+	}
+	ion-app {
+		transition: left 1s, right 1s, background-color 1s;
+	}
+	html body.thin ion-app {
+		left: calc((100% - 940px) / 2);
+		right: calc((100% - 940px) / 2);
+	}
+}'
+]
+
+{ #category : 'accessing' }
+TpLocationApp class >> version [
+
+	^ 'v0.0.1'
+]
+
 { #category : 'accessing' }
 TpLocationApp >> connections [
 
