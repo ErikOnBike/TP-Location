@@ -23,10 +23,33 @@ CREATE TABLE IF NOT EXISTS sessions (
 	accessToken TEXT NOT NULL UNIQUE,
 	expires TEXT NOT NULL		/* 'usage', 'day' or 'never' */
 );
-CREATE TABLE IF NOT EXISTS locations (
+CREATE TABLE IF NOT EXISTS preferences (
 	id TEXT NOT NULL PRIMARY KEY,
+	createdAt INTEGER NOT NULL,
+	updatedAt INTEGER,
+	deletedAt INTEGER,
+	accountId TEXT NOT NULL UNIQUE,
+	language TEXT
+);
+CREATE TABLE IF NOT EXISTS connections (
+	id TEXT NOT NULL PRIMARY KEY,
+	createdAt INTEGER NOT NULL,
+	updatedAt INTEGER,
+	deletedAt INTEGER,
+	accountId TEXT NOT NULL,
+	otherId TEXT NOT NULL,
+	name TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS locations (
+	id INTEGER NOT NULL PRIMARY KEY,
 	timestamp INTEGER NOT NULL,
 	accountId TEXT NOT NULL,
 	lat REAL NOT NULL,
 	lon REAL NOT NULL
+);
+CREATE TABLE IF NOT EXISTS actions (
+	id INTEGER NOT NULL PRIMARY KEY,
+	timestamp INTEGER NOT NULL,
+	accountId TEXT NOT NULL,
+	action TEXT NOT NULL
 );
