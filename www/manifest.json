@@ -1,0 +1,19 @@
+{
+	"name": "TP Location Viewer",
+	"short_name": "TP Location Viewer",
+	"display": "fullscreen",
+	"background_color": "#000",
+	"theme_color": "#dd9561",
+	"description": "View shared locations",
+	"icons": [
+		{
+			"src": "img/logo.png",
+			"sizes": "527x527",
+			"type": "image/png"
+		}
+	],
+	"start_url": "./index.html",
+	"id": "/index.html",
+	"orientation": "portrait",
+	"screenshots": []
+}
