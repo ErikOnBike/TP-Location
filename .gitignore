@@ -3,6 +3,7 @@
 
 server/server.image
 server/send_loc.sh
+server/send_loc_prod.sh
 server/data/database.db
 server/data/log.db
 server/node_modules
