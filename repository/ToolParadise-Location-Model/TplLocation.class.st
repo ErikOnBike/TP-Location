@@ -1,9 +1,10 @@
 Class {
-	#name : 'TpLocation',
+	#name : 'TplLocation',
 	#superclass : 'CynPropertyEntity',
 	#instVars : [
 		'#lat => CynPropertySlot',
 		'#lon => CynPropertySlot',
+		'#action => CynPropertySlot',
 		'#timestamp => CynPropertySlot'
 	],
 	#category : 'ToolParadise-Location-Model-Core',
@@ -12,41 +13,47 @@ Class {
 }
 
 { #category : 'accessing - generated' }
-TpLocation class >> allPropertyNames [
+TplLocation class >> allPropertyNames [
 
 	"Generated code. DO NOT EDIT"
 
-	^ #(id lat lon timestamp)
+	^ #(id lat lon action timestamp)
 ]
 
 { #category : 'accessing - generated' }
-TpLocation class >> readWriteProperties [
+TplLocation class >> readWriteProperties [
 
 	"Generated code. DO NOT EDIT"
 
-	^ #(id lat lon timestamp)
+	^ #(id lat lon action timestamp)
 ]
 
 { #category : 'accessing' }
-TpLocation >> addTimestamp [
+TplLocation >> action [
+
+	^ action
+]
+
+{ #category : 'accessing' }
+TplLocation >> addTimestamp [
 
 	timestamp := CpJavaScriptDate timestampNow
 ]
 
 { #category : 'accessing' }
-TpLocation >> lat [
+TplLocation >> lat [
 
 	^ lat
 ]
 
 { #category : 'accessing' }
-TpLocation >> lon [
+TplLocation >> lon [
 
 	^ lon
 ]
 
 { #category : 'accessing' }
-TpLocation >> timestamp [
+TplLocation >> timestamp [
 
 	^ timestamp
 ]

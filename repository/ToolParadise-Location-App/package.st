@@ -1,1 +1,1 @@
-Package { #name : #'ToolParadise-Location-App' }
+Package { #name : 'ToolParadise-Location-App' }

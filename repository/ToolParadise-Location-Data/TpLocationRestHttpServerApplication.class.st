@@ -11,7 +11,7 @@ TpLocationRestHttpServerApplication class >> allowedPackages [
 
 	"Answer a collection of Packages which are allowed to contain classes to install in the receiver"
 
-	^ super allowedPackages, { TpLocation package }
+	^ super allowedPackages, { TplLocation package }
 ]
 
 { #category : 'actions' }
