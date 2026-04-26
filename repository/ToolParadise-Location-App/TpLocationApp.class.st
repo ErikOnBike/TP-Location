@@ -209,9 +209,9 @@ TpLocationApp >> loadMenu [
 
 	"Create (literal) structure with the menu items"
 	menuStructure := {
-		{ 'map-outline' . '#000' . TplMapPage . #'app.menu.map' }.
-"		{ 'settings' . '#000' . TplPreferencesPage . #'app.menu.preferences' }."
-		{ 'log-out-outline' . '#000' . TplLogoutPage . #'app.menu.logout' } }.
+		{ 'map-outline' . '#FF487C' . TplMapPage . #'app.menu.map' }.
+		{ 'settings' . '#F7B32B' . TplPreferencesPage . #'app.menu.preferences' }.
+		{ 'log-out-outline' . '#45CFC5' . TplLogoutPage . #'app.menu.logout' } }.
 
 	menuContentElement := IonContent new
 		appendChild: (IonList new

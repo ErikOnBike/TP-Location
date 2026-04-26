@@ -1,6 +1,6 @@
 Class {
 	#name : 'TplPreferences',
-	#superclass : 'CynPropertyEntity',
+	#superclass : 'TplEntity',
 	#instVars : [
 		'#accountId => CynPropertySlot',
 		'#language => CynPropertySlot'

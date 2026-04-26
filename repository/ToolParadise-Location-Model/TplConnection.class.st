@@ -1,6 +1,6 @@
 Class {
 	#name : 'TplConnection',
-	#superclass : 'CynPropertyEntity',
+	#superclass : 'TplEntity',
 	#instVars : [
 		'#otherId => CynPropertySlot',
 		'#name => CynPropertySlot'

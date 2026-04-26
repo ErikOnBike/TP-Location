@@ -83,7 +83,7 @@ TplPreferencesPage >> languageChanged: aPropertyChanged [
 	language := aPropertyChanged newValue
 		ifNotNil: [ :newValue | newValue asSymbol ].
 
-	(AmPreferences languages includes: language)
+	(TplPreferences languages includes: language)
 		ifFalse: [ ^ self ].
 
 	CynApp updateLanguage: (CynApp languageWithLocale: language)

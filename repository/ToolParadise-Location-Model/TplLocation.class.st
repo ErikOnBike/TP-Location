@@ -1,6 +1,6 @@
 Class {
 	#name : 'TplLocation',
-	#superclass : 'CynPropertyEntity',
+	#superclass : 'TplEntity',
 	#instVars : [
 		'#lat => CynPropertySlot',
 		'#lon => CynPropertySlot',

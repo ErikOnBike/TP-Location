@@ -147,7 +147,7 @@ TplLoginAccountPage >> registerAccountLink [
 TplLoginAccountPage >> showPasswordForgotten [
 
 	self
-		navigateTo: AmPasswordForgottenAccountPage
+		navigateTo: TplPasswordForgottenAccountPage
 		withModel: (CynPasswordForgottenAccount new
 			email: self account email ;
 			yourself)
@@ -157,7 +157,7 @@ TplLoginAccountPage >> showPasswordForgotten [
 TplLoginAccountPage >> showRegisterAccount [
 
 	self
-		navigateTo: AmRegisterAccountPage
+		navigateTo: TplRegisterAccountPage
 		withModel: (CynRegisterAccount new
 			email: self account email ;
 			yourself)
