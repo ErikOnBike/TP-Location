@@ -263,7 +263,7 @@ TpLocationRestApiService >> getConnectionLocations: connectionIdString forAccoun
 
 	^ modelDatabase
 		selectMany: #accountLocations
-		statement: 'SELECT lat, lon, timestamp FROM locations WHERE accountId=:accountId ORDER BY timestamp DESC LIMIT 400'
+		statement: 'SELECT lat, lon, timestamp FROM locations WHERE accountId=:accountId ORDER BY timestamp DESC LIMIT 4'
 		bind: { #accountId -> locationAccountId } asDictionary
 ]
 
